@@ -1,3 +1,9 @@
+import subprocess
+def getDirectory():
+    """Gets current directory"""
+    out = subprocess.run(["ls", "-la"], capture_output=True)
+    print(out)
+
 calc = 0
 
 def val():

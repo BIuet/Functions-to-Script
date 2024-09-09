@@ -22,7 +22,7 @@ class Gui:
         while choice != "0":
             choice = input("> ")
             if choice.isnumeric() and choice != "0":
-                if int(choice) < len(self.scripts):
+                if int(choice) <= len(self.scripts):
                     self.scripts[int(choice)-1].funct()
                 else:
                     print("Invalid Choice" + menu)

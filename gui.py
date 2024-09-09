@@ -14,16 +14,20 @@ class Gui:
         self.title = title
     def run(self):
         os.system("clear")
-        menu = f"{self.title}\n{'\n'.join([f'    [{i + 1}] {display}' for (i, display) in enumerate([x.display for x in self.scripts])])}"
+        newLineChar = "\n"
+        menu = f"{newLineChar}{f'{newLineChar}'.join([f'    [{i + 1}] {display}' for (i, display) in enumerate([x.display for x in self.scripts])])}"
         menu += "\n    [0] Exit"
-        print(menu)
+        print(f"{self.title}" + menu)
         choice = ""
         while choice != "0":
             choice = input("> ")
             if choice.isnumeric() and choice != "0":
-                self.scripts[int(choice)-1].funct()
+                if int(choice) < len(self.scripts):
+                    self.scripts[int(choice)-1].funct()
+                else:
+                    print("Invalid Choice" + menu)
             elif choice == "0":
                 break
             else:
-                print("Invalid choice")
+                print("Invalid choice" + menu)
         os.system("clear")

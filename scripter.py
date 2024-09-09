@@ -43,14 +43,12 @@ def buildRunScript(name):
         os.remove("scripterRun.py")
 
 def buildFullScript(name):
-    imported = sys.argv[1][:-3]
     gui = readF("gui.py")
-    endres = f"import {imported}\n{gui}\ng = Gui('{name}')\n"
     f = readF(sys.argv[1])
-    endres += f + "\n"
+    endres = f"{f}\n{gui}\ng = Gui('{name}')\n"
     f = f.split()
-    funcs = parseFunc(f)[0]
-    for func in funcs:
+    funcs = parseFunc(f)
+    for func in funcs[0]:
         endres += f"g.addScript(Script({func}, ' '.join([x for x in {func}.__doc__.split(' ') if x != '']).replace('\\n','\\n       ')))\n"
     endres += f"g.run()"
     with open("scripterRun.py", 'w+') as r:
